@@ -1,27 +1,24 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Container } from '@react-navigation/native';
 
 const BusquedaVehiculos = () => {
+  const navigation = useNavigation();
   return (
-    <ImageBackground source={{ uri: 'https://th.bing.com/th/id/OIP.VgcW1RJi4lInA8271kfSDgHaNK?rs=1&pid=ImgDetMain' }} style={styles.backgroundImage}>
+    
+   
     <View>
-    <Text style={styles.titulo}>Búsqueda de Vehículos</Text>
-    <View style={styles.container}>
-        
-      <View style={styles.formulario}>
-        <TextInput
-          style={styles.input}
-          placeholder="Marca"
-          placeholderTextColor="gray" 
-        />
+   
 
-        <Button
+        <Button style={styles.Button}
           title="Buscar"
+          onPress={() => navigation.navigate('Catalogo')}
         />
-      </View>
+     
+
     </View>
-    </View>
-    </ImageBackground>
+   
   );
 }
 
@@ -56,6 +53,11 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   },
+  Button: {
+    flex: 1,
+    color: 'blue'
+
+  }
   
 });
 

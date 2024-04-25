@@ -1,22 +1,32 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+
+const Validation = () =>{
+  if(Nombre = ''){
+    Alert.alert('Alert Title', 'Falta El nombre', )
+  }
+}
 
 const AgendarTaller = () => {
+  
   return (
+    
     <View style={styles.container}>
       <Text style={styles.titulo}>Agendar Taller</Text>
       <View style={styles.formulario}>
-        <Text style={styles.label}>Nombre:</Text>
+        <Text style={styles.label} title='Nombre'>Nombre:</Text>
         <TextInput
           style={styles.input}
           placeholder="Nombre"
           placeholderTextColor="gray" 
+          maxLength={10}
         />
         <Text style={styles.label}>Apellidos:</Text>
         <TextInput
           style={styles.input}
           placeholder="Apellidos"
           placeholderTextColor="gray" 
+          maxLength={10}
         />
         <Text style={styles.label}>Correo Electrónico:</Text>
         <TextInput
@@ -24,6 +34,7 @@ const AgendarTaller = () => {
           placeholder="Correo Electrónico"
           keyboardType="email-address"
           placeholderTextColor="gray" 
+          maxLength={50}
         />
         <Text style={styles.label}>Teléfono:</Text>
         <TextInput
@@ -31,6 +42,7 @@ const AgendarTaller = () => {
           placeholder="Teléfono"
           keyboardType="phone-pad"
           placeholderTextColor="gray" 
+          maxLength={13}
         />
         <Text style={styles.label}>Servicio:</Text>
         <TextInput
@@ -48,6 +60,9 @@ const AgendarTaller = () => {
         />
         <Button
           title="Agendar"
+           onPress={() =>  Validation
+
+           }
         />
       </View>
     </View>
@@ -76,6 +91,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
+    color: 'black'
   },
   label: {
     fontSize: 16,
