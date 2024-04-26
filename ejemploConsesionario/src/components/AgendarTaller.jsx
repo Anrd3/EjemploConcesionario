@@ -49,6 +49,7 @@ const AgendarTaller = () => {
           style={styles.input}
           placeholder="Servicio"
           placeholderTextColor="gray" 
+          maxLength={50}
         />
         <Text style={styles.label}>Descripción:</Text>
         <TextInput

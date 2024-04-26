@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "native-base": "^3.4.28",
+    "react-native-swiper": "^1.6.0"
+  }
+}

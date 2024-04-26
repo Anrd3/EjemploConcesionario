@@ -10,23 +10,27 @@ const SolicitudCotizacion = () => {
           style={styles.input}
           placeholder="Nombre"
           placeholderTextColor="gray" 
+          maxLength={20}
         />
         <TextInput
           style={styles.input}
           placeholder="Apellidos"
-          placeholderTextColor="gray" 
+          placeholderTextColor="gray"
+          maxLength={20} 
         />
         <TextInput
           style={styles.input}
           placeholder="Correo Electrónico"
           keyboardType="email-address"
-          placeholderTextColor="gray" 
+          placeholderTextColor="gray"
+          maxLength={50} 
         />
         <TextInput
           style={styles.input}
           placeholder="Teléfono"
           keyboardType="phone-pad"
-          placeholderTextColor="gray" 
+          placeholderTextColor="gray"
+          maxLength={20} 
         />
         <TextInput
           style={styles.input}

@@ -25,7 +25,7 @@ import MenuPrincipal from './src/components/MenuPrincipal';
         <PedidoState>
           <NavigationContainer>
             <Stack.Navigator>
-              <Stack.Screen name='MenuPrincipal' component={MenuPrincipal}/>
+              <Stack.Screen name='MenuPrincipal' component={MenuPrincipal} options={{ headerShown: false }}/>
               <Stack.Screen name='BusquedaVehiculos' component={BusquedaVehiculos}/>
               <Stack.Screen name='Catalogo' component={Catalogo}/>
               <Stack.Screen name='SolicitudPruebaDeManejo' component={SolicitudPruebaDeManejo}/>
