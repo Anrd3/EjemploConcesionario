@@ -1,7 +1,24 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 const SolicitudPruebaManejo = () => {
+  const [nombre,setNombre]= useState("")
+  const [apellido,setApellido]= useState("")
+  const [fechaSolicitud,setFechaSolicitud]= useState("")
+  const [cedula,setCedula]= useState("")
+  const [celular,setCelular]=useState("")
+
+const handleChange = () => {
+  if(!nombre || !apellido || !fechaSolicitud || !cedula || !celular){
+    Alert.alert("Es necesario rellenar todos los campos")
+  }
+  else{
+    Alert.alert("Todos los campos rellenados correctamente")
+  }
+}
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Solicitud de Prueba de Manejo</Text>
@@ -11,32 +28,43 @@ const SolicitudPruebaManejo = () => {
           style={styles.input}
           placeholder="Nombre"
           placeholderTextColor="gray" 
+          value={nombre}
+          onChangeText={(text) => setNombre(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Apellidos"
           placeholderTextColor="gray" 
+          value={apellido}
+          onChangeText={(text) => setApellido(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Fecha de Solicitud"
           keyboardType="numeric"
           placeholderTextColor="gray" 
+          value={fechaSolicitud}
+          onChangeText={(text) => setFechaSolicitud(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="CC"
           keyboardType="numeric"
           placeholderTextColor="gray" 
+          value={cedula}
+          onChangeText={(text) => setCedula(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Celular"
           keyboardType="phone-pad"
           placeholderTextColor="gray" 
+          value={celular}
+          onChangeText={(text) => setCelular(text)}
         />
         <Button
           title="Solicitar Cita"
+          onPress={handleChange}
         />
       </View>
     </View>
@@ -65,6 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 30,
+    color: 'black'
     
   },
 });
