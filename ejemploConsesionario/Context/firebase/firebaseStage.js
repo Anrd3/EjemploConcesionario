@@ -1,11 +1,11 @@
-import React, {useReducer} from 'react'
-
+import React, { useReducer } from 'react'
 import firebaseReducer  from './firebaseReducer'
 import FirebaseContext from './firebaseContext'
 import firebase from '../../firebase'
+import { OBTENER_PRODUCTOS_EXITO } from '../../types'
+import _ from 'lodash'
 
-import BusquedaVehiculos from '../../src/components/BusquedaVehiculos'
-import { Menu } from 'react-native-paper'
+
 
 
 const FirebaseState = props =>{
@@ -15,15 +15,40 @@ const FirebaseState = props =>{
 
     const [state, dispatch] = useReducer(firebaseReducer,initialState)
 
+    const obtenerProducto = () => {
+
+        firebase.db
+        .collection('productos')
+        .onSnapshot(manejarSnapshot) // manejo db tiempo real
+
+        function manejarSnapshot(snapshot){
+            let plato = snapshot.docs.map(doc=> {
+                return{
+                 
+                    id: doc.id,
+                    ...doc.data()
+                       
+                }
+            });
+
+            plato = _.sortBy(plato, 'categoriaScrollView')
+           console.log(plato)
+            dispatch({
+                type: OBTENER_PRODUCTOS_EXITO,
+                payload: plato
+                
+            })
+            
+        } 
+    }
     
 
             return(
                 <FirebaseContext.Provider
                 value={{
                     menu: state.menu,
-                    firebase
-                    
-
+                    firebase,
+                    obtenerProducto
                 }}
                 >
                    {props.children} 

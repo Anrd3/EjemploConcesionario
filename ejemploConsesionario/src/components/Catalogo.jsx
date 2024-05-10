@@ -1,98 +1,132 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet,ScrollView } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { Image, View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import FirebaseContext from '../../Context/firebase/firebaseContext';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
-
-const catalogo = [
-  {
-    id: 1,
-    nombre: 'Honda NSX Hybrid Super Car',
-    descripcion: 'Descripción del Vehículo 1',
-    precio: '?',
-    imagenUrl: 'https://th.bing.com/th/id/OIP.JeJrXHqGlrDu_Uw_n8uRKQHaEK?rs=1&pid=ImgDetMain',
-  },
-  {
-    id: 2,
-    nombre: 'BMW',
-    descripcion: 'Descripción del Vehículo 2',
-    precio: '?',
-    imagenUrl: 'https://www.dmarge.com/wp-content/uploads/2017/05/bmw1.jpg',
-  },
-  {
-    id: 3,
-    nombre: 'Ferrari',
-    descripcion: 'Descripción del Vehículo 3',
-    precio: '?',
-    imagenUrl: 'https://th.bing.com/th/id/R.43d9d7f765284bc64b1e660555e69891?rik=1hdSz%2bKOJYW9Ig&riu=http%3a%2f%2fcdn.carbuzz.com%2fgallery-images%2f1600%2f743000%2f300%2f743304.jpg&ehk=%2fcUTlfZ3gN0HhJuRJQrGH1ekzW6juBazUlJNdHNTi2E%3d&risl=&pid=ImgRaw&r=0',
-  },
-  {
-    id: 4,
-    nombre: 'Rolls Royce',
-    descripcion: 'Descripción del Vehículo 4',
-    precio: '?',
-    imagenUrl: 'https://wallpaperaccess.com/full/423086.jpg',
-  },
-
-
-];
+const { width } = Dimensions.get('window');
 
 const Catalogo = () => {
-  return (
-    <View style={styles.container}>
+  const navigation = useNavigation();
+  const { menu, obtenerProducto } = useContext(FirebaseContext);
 
-      {catalogo.map(vehiculo => (
-        <View key={vehiculo.id} style={styles.vehiculoContainer}>
-          <Image
-            source={{ uri: vehiculo.imagenUrl }}
-            style={styles.imagenVehiculo}
-          />
-          <View style={styles.infoVehiculo}>
-            <Text style={styles.nombreVehiculo}>{vehiculo.nombre}</Text>
-            <Text style={styles.descripcionVehiculo}>{vehiculo.descripcion}</Text>
-            <Text style={styles.precioVehiculo}>${vehiculo.precio}</Text>
-          </View>
+  useEffect(() => {
+    obtenerProducto();
+  }, []);
+
+  const renderPlato = ({ item }) => {
+    const vehiculos = [];
+  
+    if (item.BMW) {
+      vehiculos.push(
+        <TouchableHighlight onPress={() => navigation.navigate('')} underlayColor="black">
+        <View style={styles.Vehiculo} key="BMW">
+          <Text style={styles.titulo}>{item.BMW}</Text>
+          <Image style={styles.image} source={{ uri: item.Imagen }} />
+          <Text style={styles.descripcion}>{item.Descripcion}</Text>
         </View>
-      ))}
-    </View>
+            </TouchableHighlight>
+      );
+    }
+  
+    if (item.Ferrari) {
+      vehiculos.push(
+        <TouchableHighlight onPress={() => navigation.navigate('DetallesFerrari')} underlayColor="black">
+        <View style={styles.Vehiculo} key="Ferrari">
+          <Text style={styles.titulo}>{item.Ferrari}</Text>
+          <Image style={styles.image} source={{ uri: item.ImagenF }} />
+          <Text style={styles.descripcion}>{item.DescripcionF}</Text>
+        </View>
+        </TouchableHighlight>
+      );
+    }
+  
+    if (item.RollsRoyce) {
+      vehiculos.push(
+        <TouchableHighlight onPress={() => navigation.navigate('')} underlayColor="black">
+        <View style={styles.Vehiculo} key="RollsRoyce">
+          <Text style={styles.titulo}>{item.RollsRoyce}</Text>
+          <Image style={styles.image} source={{ uri: item.ImagenR }} />
+          <Text style={styles.descripcion}>{item.DescripcionR}</Text>
+        </View>
+        </TouchableHighlight>
+      );
+    }
+    if (item.Renault) {
+      vehiculos.push(
+        <TouchableHighlight onPress={() => navigation.navigate('')} underlayColor="black">
+        <View style={styles.Vehiculo} key="Renault">
+        <Text style={styles.titulo}>{item.Renault }</Text>
+        <Text></Text> 
+        <Image style={styles.image} source={{ uri: item.ImagenRe }} />
+        <Text style={styles.descripcion}>{item.DescripcionRe}</Text>
+      </View>
+      </TouchableHighlight>
+      )
+    }
+  
+    return (
+      <View style={styles.container}>
+        {vehiculos}
+      </View>
+    );
+  };
+  
+
+
+  return (
+    <FlatList
+      data={menu}
+      renderItem={renderPlato}
+      keyExtractor={( index) => index.toString()}
+      numColumns={2} // Cambiado a 2 columnas para dos tarjetas por fila
+      contentContainerStyle={styles.flatListContainer}
+    />
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  flatListContainer: {
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10, // Reducido el espacio horizontal
+    paddingBottom: 10, // Reducido el espacio vertical
+    
   },
-  vehiculoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
+  Vehiculo: {
+    width: width * 0.45, // Ancho ajustado para dos tarjetas por fila
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 20,
+    margin: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 20,
+    minHeight: 500, // Establecer una altura mínima deseada para los contenedores
+    
   },
-  imagenVehiculo: {
-    width: 100,
-    height: 100,
-    marginRight: 20,
-    borderRadius: 5,
-  },
-  infoVehiculo: {
-    flex: 1,
-  },
-  nombreVehiculo: {
+  titulo: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5, // Reducido el espacio entre elementos
+    textAlign: 'center',
     color: 'black',
   },
-  descripcionVehiculo: {
-    fontSize: 16,
-    color: 'gray',
+  image: {
+    width: '100%',
+    height: 150,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    marginBottom: 5, // Reducido el espacio entre elementos
   },
-  precioVehiculo: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 5,
-    color: 'red',
+  descripcion: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: 'black',
   },
   
 });
 
 export default Catalogo;
+
