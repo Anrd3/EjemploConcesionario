@@ -13,6 +13,7 @@
   import PedidoState from './Context/pedidos/pedidoState';
   import FirebaseState from './Context/firebase/firebaseStage';
   import DetallesFerrari from './src/components/Coches.jsx/DetallesFerrari';
+  import FerrariCoches from './src/components/Coches.jsx/FerrariCoches';
 
 
 
@@ -35,6 +36,8 @@ import MenuPrincipal from './src/components/MenuPrincipal';
               <Stack.Screen name='SolicitudCotizacion' component={SolicitudCotizacion}/>
               <Stack.Screen name='Contacto' component={Contacto}/>
               <Stack.Screen name='DetallesFerrari' component={DetallesFerrari}/>
+              <Stack.Screen name='FerrariCoches' component={FerrariCoches}/>
+              
             </Stack.Navigator>
           </NavigationContainer>
         </PedidoState>

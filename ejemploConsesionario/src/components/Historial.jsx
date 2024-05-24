@@ -14,11 +14,7 @@ const HistorialServicios = () => {
         <Text style={styles.servicioTexto}>Ejemplo</Text>
         <Text style={styles.servicioTexto}>Ejemplo</Text>
       </View>
-      <View style={styles.servicio}>
-        <Text style={styles.servicioTexto}>Fecha: 05/02/2023</Text>
-        <Text style={styles.servicioTexto}>Tipo: Reparación</Text>
-        <Text style={styles.servicioTexto}>Descripción: Reparación de frenos</Text>
-      </View>
+     
     </View>
     </View>
   );
